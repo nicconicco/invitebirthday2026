@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite - Carlos Nicolau Galves</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+  :root {
+    --cyan: #00f5ff;
+    --magenta: #ff00ff;
+    --purple: #9d00ff;
+    --yellow: #ffff00;
+    --dark: #050510;
+    --dark2: #0a0a20;
+    --grid: rgba(0, 245, 255, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--cyan);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .page {
+    width: 800px;
+    min-height: 1100px;
+    margin: 0 auto;
+    position: relative;
+    background: var(--dark2);
+    border: 1px solid var(--cyan);
+    box-shadow:
+      0 0 30px var(--cyan),
+      0 0 60px rgba(0,245,255,0.3),
+      inset 0 0 60px rgba(0,245,255,0.03);
+    overflow: hidden;
+  }
+
+  /* Grid background */
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+  }
+
+  /* Scanlines */
+  .scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.15) 2px,
+      rgba(0,0,0,0.15) 4px
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Corner decorations */
+  .corner {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index: 10;
+  }
+  .corner-tl { top: 10px; left: 10px; border-top: 3px solid var(--magenta); border-left: 3px solid var(--magenta); }
+  .corner-tr { top: 10px; right: 10px; border-top: 3px solid var(--magenta); border-right: 3px solid var(--magenta); }
+  .corner-bl { bottom: 10px; left: 10px; border-bottom: 3px solid var(--magenta); border-left: 3px solid var(--magenta); }
+  .corner-br { bottom: 10px; right: 10px; border-bottom: 3px solid var(--magenta); border-right: 3px solid var(--magenta); }
+
+  /* Glitch line */
+  .glitch-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--magenta), var(--cyan), transparent);
+    animation: glitch-move 4s linear infinite;
+    z-index: 5;
+    opacity: 0.7;
+  }
+  .glitch-line-1 { width: 60%; top: 25%; left: 0; animation-delay: 0s; }
+  .glitch-line-2 { width: 40%; top: 65%; right: 0; animation-delay: 2s; }
+
+  @keyframes glitch-move {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+
+  /* Content */
+  .content {
+    position: relative;
+    z-index: 10;
+    padding: 50px 60px;
+  }
+
+  /* Header tag */
+  .sys-tag {
+    font-size: 13px;
+    color: rgba(0,245,255,0.5);
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  /* Main title */
+  .title-block {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .title-top {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 17px;
+    letter-spacing: 8px;
+    color: var(--magenta);
+    text-shadow: 0 0 10px var(--magenta);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .title-main {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--cyan);
+    text-shadow:
+      0 0 10px var(--cyan),
+      0 0 30px var(--cyan),
+      0 0 60px rgba(0,245,255,0.5);
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: relative;
+  }
+
+  .title-main::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    color: var(--magenta);
+    clip-path: polygon(0 30%, 100% 30%, 100% 40%, 0 40%);
+    transform: translateX(-3px);
+    opacity: 0.6;
+    animation: glitch-text 5s infinite;
+  }
+
+  @keyframes glitch-text {
+    0%, 90%, 100% { transform: translateX(-3px); opacity: 0.6; }
+    92% { transform: translateX(3px); opacity: 0.8; }
+    94% { transform: translateX(-3px); opacity: 0.4; }
+    96% { transform: translateX(0px); opacity: 0; }
+    98% { transform: translateX(3px); opacity: 0.6; }
+  }
+
+  .title-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    letter-spacing: 6px;
+    margin-top: 6px;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  }
+  .divider-diamond {
+    width: 8px;
+    height: 8px;
+    background: var(--magenta);
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px var(--magenta);
+  }
+
+  /* Info cards */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .info-card {
+    background: rgba(0,245,255,0.04);
+    border: 1px solid rgba(0,245,255,0.25);
+    padding: 16px 20px;
+    position: relative;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .info-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 12px;
+    width: 0; height: 0;
+    border-left: 12px solid transparent;
+    border-top: 12px solid rgba(0,245,255,0.25);
+  }
+
+  .info-card.highlight {
+    border-color: rgba(255,0,255,0.4);
+    background: rgba(255,0,255,0.04);
+  }
+  .info-card.highlight::before {
+    border-top-color: rgba(255,0,255,0.4);
+  }
+
+  .info-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: rgba(0,245,255,0.5);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .info-card.highlight .info-label { color: rgba(255,0,255,0.6); }
+
+  .info-value {
+    font-size: 20px;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(255,255,255,0.3);
+  }
+
+  .info-value .accent {
+    color: var(--cyan);
+    text-shadow: 0 0 8px var(--cyan);
+  }
+  .info-card.highlight .info-value .accent {
+    color: var(--magenta);
+    text-shadow: 0 0 8px var(--magenta);
+  }
+
+  /* Location section */
+  .location-section {
+    margin-bottom: 20px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .section-icon {
+    font-size: 20px;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    letter-spacing: 5px;
+    color: var(--magenta);
+    text-shadow: 0 0 8px var(--magenta);
+    text-transform: uppercase;
+  }
+
+  .location-card {
+    background: rgba(157,0,255,0.06);
+    border: 1px solid rgba(157,0,255,0.35);
+    padding: 16px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .location-card::after {
+    content: 'LOCATION LOCKED';
+    position: absolute;
+    right: -30px;
+    top: 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(157,0,255,0.3);
+    transform: rotate(90deg);
+    transform-origin: right center;
+  }
+
+  .location-address {
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  .location-address strong {
+    color: var(--purple);
+    text-shadow: 0 0 8px var(--purple);
+    font-size: 22px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .location-note {
+    font-size: 14px;
+    color: rgba(157,0,255,0.7);
+    border-top: 1px solid rgba(157,0,255,0.2);
+    padding-top: 8px;
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  /* Map placeholder */
+  .map-container {
+    width: 100%;
+    height: 160px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(157,0,255,0.3);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .map-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(157,0,255,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(157,0,255,0.08) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .map-crosshair {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+  }
+
+  .map-pin {
+    font-size: 36px;
+    display: block;
+    filter: drop-shadow(0 0 10px var(--magenta));
+    animation: pulse-pin 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-pin {
+    0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 10px var(--magenta)); }
+    50% { transform: translateY(-5px); filter: drop-shadow(0 0 20px var(--magenta)); }
+  }
+
+  .map-coords {
+    font-size: 13px;
+    color: rgba(157,0,255,0.8);
+    letter-spacing: 2px;
+    margin-top: 4px;
+  }
+
+  .map-link {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-size: 13px;
+    color: var(--purple);
+    letter-spacing: 1px;
+    text-decoration: none;
+    border: 1px solid rgba(157,0,255,0.3);
+    padding: 3px 8px;
+    z-index: 5;
+  }
+
+  .map-link:hover { background: rgba(157,0,255,0.2); }
+
+  /* Radar rings */
+  .radar-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(157,0,255,0.15);
+    animation: radar-expand 3s linear infinite;
+  }
+
+  @keyframes radar-expand {
+    0% { transform: scale(0.3); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+
+  .radar-ring:nth-child(1) { width: 60px; height: 60px; animation-delay: 0s; }
+  .radar-ring:nth-child(2) { width: 60px; height: 60px; animation-delay: 1s; }
+  .radar-ring:nth-child(3) { width: 60px; height: 60px; animation-delay: 2s; }
+
+  /* Alerts / notes */
+  .alerts-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(255,255,0,0.03);
+    border-left: 2px solid var(--yellow);
+    font-size: 15px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+
+  .alert-icon {
+    color: var(--yellow);
+    text-shadow: 0 0 8px var(--yellow);
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .alert strong {
+    color: var(--yellow);
+    text-shadow: 0 0 6px var(--yellow);
+  }
+
+  /* RSVP section */
+  .rsvp-section {
+    background: rgba(255,0,255,0.05);
+    border: 1px solid rgba(255,0,255,0.4);
+    padding: 20px;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .rsvp-section::before {
+    content: '[ CONFIRMAÇÃO OBRIGATÓRIA ]';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--dark2);
+    padding: 0 10px;
+    font-size: 13px;
+    color: var(--magenta);
+    letter-spacing: 3px;
+    text-shadow: 0 0 8px var(--magenta);
+  }
+
+  .rsvp-text {
+    font-size: 16px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+
+  .rsvp-deadline {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 26px;
+    color: var(--magenta);
+    text-shadow: 0 0 15px var(--magenta);
+    text-align: center;
+    letter-spacing: 3px;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid rgba(0,245,255,0.15);
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-size: 12px;
+    color: rgba(0,245,255,0.3);
+    letter-spacing: 2px;
+  }
+
+  .footer-right {
+    font-size: 12px;
+    color: rgba(0,245,255,0.3);
+    letter-spacing: 2px;
+  }
+
+  /* Music button */
+  .music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+    background: rgba(10,10,32,0.9);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 10px 16px;
+    cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    box-shadow: 0 0 15px rgba(0,245,255,0.3);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .music-btn:hover {
+    background: rgba(0,245,255,0.1);
+    box-shadow: 0 0 25px rgba(0,245,255,0.6);
+  }
+  .music-btn.playing {
+    border-color: var(--magenta);
+    color: var(--magenta);
+    box-shadow: 0 0 15px rgba(255,0,255,0.4);
+  }
+  .music-btn .icon { font-size: 14px; }
+  .music-visualizer {
+    display: none;
+    gap: 2px;
+    align-items: flex-end;
+    height: 14px;
+  }
+  .music-btn.playing .music-visualizer { display: flex; }
+  .music-visualizer span {
+    width: 3px;
+    background: var(--magenta);
+    box-shadow: 0 0 4px var(--magenta);
+    animation: bar-dance 0.6s ease-in-out infinite alternate;
+    border-radius: 1px;
+  }
+  .music-visualizer span:nth-child(1) { height: 4px; animation-delay: 0s; }
+  .music-visualizer span:nth-child(2) { height: 10px; animation-delay: 0.1s; }
+  .music-visualizer span:nth-child(3) { height: 7px; animation-delay: 0.2s; }
+  .music-visualizer span:nth-child(4) { height: 12px; animation-delay: 0.15s; }
+  .music-visualizer span:nth-child(5) { height: 5px; animation-delay: 0.05s; }
+  @keyframes bar-dance {
+    from { transform: scaleY(0.4); }
+    to   { transform: scaleY(1.2); }
+  }
+
+  /* Neon accents */
+  .neon-bar {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), var(--purple), transparent);
+    margin: 20px 0;
+    box-shadow: 0 0 10px rgba(0,245,255,0.5);
+  }
+
+  /* Particle dots */
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--cyan);
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: float-particle linear infinite;
+  }
+
+  @keyframes float-particle {
+    0% { transform: translateY(100%); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+  }
+
+  /* Chopp badge */
+  .chopp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,245,255,0.08);
+    border: 1px solid rgba(0,245,255,0.3);
+    padding: 4px 12px;
+    font-size: 11px;
+    color: var(--cyan);
+    text-shadow: 0 0 6px var(--cyan);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <!-- Background elements -->
+  <div class="grid-bg"></div>
+  <div class="scanlines"></div>
+
+  <!-- Corners -->
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <!-- Glitch lines -->
+  <div class="glitch-line glitch-line-1"></div>
+  <div class="glitch-line glitch-line-2"></div>
+
+  <!-- Particles -->
+  <div class="particle" style="left:10%;animation-duration:8s;animation-delay:0s;"></div>
+  <div class="particle" style="left:25%;animation-duration:12s;animation-delay:2s;"></div>
+  <div class="particle" style="left:50%;animation-duration:9s;animation-delay:5s;"></div>
+  <div class="particle" style="left:75%;animation-duration:11s;animation-delay:1s;"></div>
+  <div class="particle" style="left:90%;animation-duration:7s;animation-delay:3s;"></div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- System tag -->
+    <div class="sys-tag">&gt;&gt; TRANSMISSION_INCOMING // PRIORITY.HIGH // ENCODE:CYBER ▓▒░</div>
+
+    <!-- Title -->
+    <div class="title-block">
+      <div class="title-top">// CONVITE ESPECIAL //</div>
+      <div class="title-main" data-text="ANIVERSÁRIO">ANIVERSÁRIO</div>
+      <div class="title-name">CARLOS NICOLAU GALVES</div>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Info cards -->
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-label">▸ Data do Evento</div>
+        <div class="info-value"><span class="accent">SÁBADO</span><br>23 DE MAIO</div>
+      </div>
+      <div class="info-card highlight">
+        <div class="info-label">▸ Horário</div>
+        <div class="info-value"><span class="accent">14:00h</span> → <span class="accent">22:00h</span></div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">▸ Local</div>
+        <div class="info-value"><span class="accent">CHURRASQUEIRA</span><br>do Condomínio</div>
+      </div>
+      <div class="info-card highlight">
+        <div class="info-label">▸ RSVP Deadline</div>
+        <div class="info-value">Até <span class="accent">21/05</span></div>
+      </div>
+    </div>
+
+    <div class="neon-bar"></div>
+
+    <!-- Location -->
+    <div class="location-section">
+      <div class="section-header">
+        <span class="section-icon">◈</span>
+        <span class="section-title">Target Location</span>
+      </div>
+
+      <div class="location-card">
+        <div class="location-address">
+          <strong>R. Francisco Raitani, 7187</strong>
+          Capão Raso · Curitiba – PR<br>
+          CEP: 81110-070
+        </div>
+        <div class="location-note">
+          ⚠ Sem vagas internas · Estacionamento disponível na RUA em frente ao condomínio
+        </div>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div class="map-container">
+      <div class="map-grid"></div>
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+      <div class="map-crosshair">
+        <span class="map-pin">📍</span>
+        <div class="map-coords">-25.5100°S · -49.2900°W · CURITIBA/PR</div>
+      </div>
+      <a class="map-link" href="https://maps.google.com/?q=R.+Francisco+Raitani,+7187,+Capão+Raso,+Curitiba+PR" target="_blank">→ OPEN MAP</a>
+    </div>
+
+    <!-- Alerts -->
+    <div class="alerts-section">
+      <div class="alert">
+        <span class="alert-icon">🍺</span>
+        <span><strong>BEBIDAS:</strong> Cada convidado traz a sua bebida. Chopp de <strong>30L ou 50L</strong> a confirmar conforme número de presentes.</span>
+      </div>
+      <div class="alert">
+        <span class="alert-icon">🥩</span>
+        <span><strong>CHURRASCO:</strong> Quantidade de carne definida com base na confirmação de convidados.</span>
+      </div>
+      <div class="alert">
+        <span class="alert-icon">🚗</span>
+        <span><strong>ESTACIONAMENTO:</strong> Sem vagas no condomínio · Espaço disponível na rua em frente.</span>
+      </div>
+    </div>
+
+    <!-- RSVP -->
+    <div class="rsvp-section">
+      <div class="rsvp-text">
+        Confirme <strong>seu nome e o de seus acompanhantes</strong> até o prazo abaixo.<br>
+        Os nomes são <strong>obrigatórios</strong> para autorização de entrada no condomínio.<br>
+        Sem confirmação prévia, a entrada não será garantida.
+      </div>
+      <div class="rsvp-deadline">⟦ PRAZO: 21 DE MAIO ⟧</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-left">ID: CNG-BDAY-2025 // CURITIBA/PR</div>
+      <div class="footer-right">AGUARDAMOS SUA PRESENÇA ◈</div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /page -->
+
+<!-- Music button -->
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+  <span class="icon" id="musicIcon">▶</span>
+  <span id="musicLabel">SYNTHWAVE</span>
+  <div class="music-visualizer">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+</button>
+
+<script>
+// ── Synthwave Sequencer ──────────────────────────────────────────
+let ctx = null;
+let playing = false;
+let timerId = null;
+let step = 0;
+let nextTime = 0;
+let padBar = 0;
+
+// Persistent audio graph nodes
+let masterBus, reverbIn, delayIn, comp;
+
+const BPM    = 108;
+const S16    = (60 / BPM) / 4;   // sixteenth note duration (seconds)
+const AHEAD  = 0.12;              // schedule lookahead window
+const TICK   = 20;                // scheduler tick (ms)
+const STEPS  = 16;
+
+// ── Patterns ────────────────────────────────────────────────────
+const KICK  = [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0];
+const SNARE = [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,1];
+const HHAT  = [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,1,1,0];
+const OPEN  = [0,0,0,0, 0,0,0,1, 0,0,0,0, 0,0,0,1];
+
+// Bass: Fm groove (F2=87.31, Ab2=103.83, C3=130.81, Eb3=155.56)
+const BASS = [
+  87.31, 0,      0,      87.31,
+  0,     0,      103.83, 0,
+  87.31, 0,      0,      87.31,
+  0,     130.81, 0,      155.56
+];
+
+// Arp: Fm pentatonic two-octave sweep
+const ARP = [
+  174.61, 207.65, 261.63, 311.13,
+  349.23, 311.13, 261.63, 207.65,
+  174.61, 261.63, 311.13, 392.00,
+  349.23, 311.13, 207.65, 174.61
+];
+
+// Chord pads: 4-bar rotation (Fm → Bbm → Cm → Ab)
+const PADS = [
+  [174.61, 207.65, 261.63, 311.13],   // Fm
+  [116.54, 138.59, 174.61, 207.65],   // Bbm
+  [130.81, 155.56, 196.00, 261.63],   // Cm
+  [103.83, 130.81, 155.56, 207.65],   // Ab
+];
+
+// ── Audio helpers ────────────────────────────────────────────────
+function buildIR(dur, decay) {
+  const len = ctx.sampleRate * dur;
+  const buf = ctx.createBuffer(2, len, ctx.sampleRate);
+  for (let c = 0; c < 2; c++) {
+    const d = buf.getChannelData(c);
+    for (let i = 0; i < len; i++)
+      d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, decay);
+  }
+  return buf;
+}
+
+function noiseBuffer(dur) {
+  const len = Math.ceil(ctx.sampleRate * dur);
+  const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+  return buf;
+}
+
+// ── Drum synthesis ───────────────────────────────────────────────
+function kick(t) {
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.type = 'sine';
+  o.frequency.setValueAtTime(190, t);
+  o.frequency.exponentialRampToValueAtTime(38, t + 0.14);
+  g.gain.setValueAtTime(1.1, t);
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.38);
+  o.connect(g); g.connect(masterBus);
+  o.start(t); o.stop(t + 0.42);
+
+  // Click transient
+  const click = ctx.createOscillator();
+  const cg    = ctx.createGain();
+  click.type = 'square'; click.frequency.value = 1200;
+  cg.gain.setValueAtTime(0.25, t);
+  cg.gain.exponentialRampToValueAtTime(0.001, t + 0.012);
+  click.connect(cg); cg.connect(masterBus);
+  click.start(t); click.stop(t + 0.015);
+}
+
+function snare(t) {
+  // Tone body
+  const o  = ctx.createOscillator();
+  const og = ctx.createGain();
+  o.type = 'triangle'; o.frequency.setValueAtTime(230, t);
+  o.frequency.exponentialRampToValueAtTime(110, t + 0.09);
+  og.gain.setValueAtTime(0.55, t);
+  og.gain.exponentialRampToValueAtTime(0.001, t + 0.13);
+  o.connect(og); og.connect(masterBus);
+  o.start(t); o.stop(t + 0.15);
+
+  // Noise snap
+  const src = ctx.createBufferSource();
+  src.buffer = noiseBuffer(0.22);
+  const hp = ctx.createBiquadFilter();
+  hp.type = 'highpass'; hp.frequency.value = 2200;
+  const ng = ctx.createGain();
+  ng.gain.setValueAtTime(0.5, t);
+  ng.gain.exponentialRampToValueAtTime(0.001, t + 0.20);
+  src.connect(hp); hp.connect(ng);
+  ng.connect(masterBus); ng.connect(reverbIn);
+  src.start(t);
+}
+
+function hihat(t, isOpen) {
+  const src = ctx.createBufferSource();
+  src.buffer = noiseBuffer(isOpen ? 0.35 : 0.08);
+  const hp = ctx.createBiquadFilter();
+  hp.type = 'highpass'; hp.frequency.value = 10000;
+  const bp = ctx.createBiquadFilter();
+  bp.type = 'bandpass'; bp.frequency.value = 14000; bp.Q.value = 0.7;
+  const g = ctx.createGain();
+  const dur = isOpen ? 0.28 : 0.038;
+  g.gain.setValueAtTime(isOpen ? 0.18 : 0.12, t);
+  g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+  src.connect(hp); hp.connect(bp); bp.connect(g); g.connect(masterBus);
+  src.start(t);
+}
+
+// ── Synth voices ─────────────────────────────────────────────────
+function bass(t, freq) {
+  const saw1 = ctx.createOscillator();
+  const saw2 = ctx.createOscillator();
+  const sub  = ctx.createOscillator();
+  const lp   = ctx.createBiquadFilter();
+  const g    = ctx.createGain();
+
+  saw1.type = 'sawtooth'; saw1.frequency.value = freq;
+  saw2.type = 'sawtooth'; saw2.frequency.value = freq; saw2.detune.value = 8;
+  sub.type  = 'sine';     sub.frequency.value  = freq / 2;
+
+  lp.type = 'lowpass';
+  lp.frequency.setValueAtTime(900, t);
+  lp.frequency.exponentialRampToValueAtTime(280, t + S16 * 0.75);
+  lp.Q.value = 5;
+
+  const subg = ctx.createGain(); subg.gain.value = 0.45;
+  sub.connect(subg); subg.connect(g);
+
+  g.gain.setValueAtTime(0, t);
+  g.gain.linearRampToValueAtTime(0.55, t + 0.007);
+  g.gain.setValueAtTime(0.42, t + S16 * 0.65);
+  g.gain.linearRampToValueAtTime(0, t + S16 * 0.88);
+
+  saw1.connect(lp); saw2.connect(lp); lp.connect(g);
+  g.connect(masterBus);
+
+  const dur = S16 * 0.95;
+  saw1.start(t); saw1.stop(t + dur);
+  saw2.start(t); saw2.stop(t + dur);
+  sub.start(t);  sub.stop(t + dur);
+}
+
+function arp(t, freq) {
+  const o  = ctx.createOscillator();
+  const o2 = ctx.createOscillator();
+  const lp = ctx.createBiquadFilter();
+  const g  = ctx.createGain();
+
+  o.type  = 'sawtooth'; o.frequency.value  = freq;
+  o2.type = 'square';   o2.frequency.value = freq; o2.detune.value = -7;
+
+  lp.type = 'lowpass'; lp.frequency.value = 4200; lp.Q.value = 3;
+
+  const o2g = ctx.createGain(); o2g.gain.value = 0.35;
+  o2.connect(o2g); o2g.connect(lp);
+
+  g.gain.setValueAtTime(0, t);
+  g.gain.linearRampToValueAtTime(0.14, t + 0.004);
+  g.gain.setValueAtTime(0.10, t + S16 * 0.45);
+  g.gain.linearRampToValueAtTime(0, t + S16 * 0.85);
+
+  o.connect(lp); lp.connect(g);
+  g.connect(masterBus);
+  g.connect(delayIn);
+  g.connect(reverbIn);
+
+  const dur = S16 * 0.9;
+  o.start(t); o.stop(t + dur);
+  o2.start(t); o2.stop(t + dur);
+}
+
+function pad(t, freqs) {
+  const dur = S16 * 16; // whole bar
+  freqs.forEach(freq => {
+    [-10, 0, 10].forEach(detune => {
+      const o  = ctx.createOscillator();
+      const lp = ctx.createBiquadFilter();
+      const g  = ctx.createGain();
+
+      o.type = 'sawtooth';
+      o.frequency.value = freq;
+      o.detune.value    = detune;
+
+      lp.type = 'lowpass'; lp.frequency.value = 1400; lp.Q.value = 0.8;
+
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.028, t + 0.55);
+      g.gain.setValueAtTime(0.022, t + dur - 0.5);
+      g.gain.linearRampToValueAtTime(0, t + dur);
+
+      o.connect(lp); lp.connect(g);
+      g.connect(reverbIn); g.connect(masterBus);
+
+      o.start(t); o.stop(t + dur + 0.1);
+    });
+  });
+}
+
+// ── Scheduler ────────────────────────────────────────────────────
+function scheduleStep(s, t) {
+  if (KICK[s])       kick(t);
+  if (SNARE[s])      snare(t);
+  if (OPEN[s])       hihat(t, true);
+  else if (HHAT[s])  hihat(t, false);
+  if (BASS[s])       bass(t, BASS[s]);
+  if (ARP[s])        arp(t,  ARP[s]);
+  if (s % 16 === 0)  { pad(t, PADS[padBar % PADS.length]); padBar++; }
+}
+
+function scheduler() {
+  while (nextTime < ctx.currentTime + AHEAD) {
+    scheduleStep(step, nextTime);
+    step     = (step + 1) % STEPS;
+    nextTime += S16;
+  }
+  timerId = setTimeout(scheduler, TICK);
+}
+
+function toggleMusic() { playing ? stopMusic() : startMusic(); }
+
+function startMusic() {
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+  // ── Master chain: bus → compressor → output ──
+  comp = ctx.createDynamicsCompressor();
+  comp.threshold.value = -16;
+  comp.knee.value      = 8;
+  comp.ratio.value     = 4;
+  comp.attack.value    = 0.003;
+  comp.release.value   = 0.18;
+  comp.connect(ctx.destination);
+
+  masterBus = ctx.createGain();
+  masterBus.gain.value = 0.72;
+  masterBus.connect(comp);
+
+  // ── Reverb ──
+  const conv = ctx.createConvolver();
+  conv.buffer = buildIR(2.2, 3.0);
+  const rvbG  = ctx.createGain();
+  rvbG.gain.value = 0.22;
+  conv.connect(rvbG); rvbG.connect(comp);
+  reverbIn = conv;
+
+  // ── Delay (dotted-eighth @ 108bpm = ~333ms) ──
+  const dly  = ctx.createDelay(1.0);
+  dly.delayTime.value = (60 / BPM) * 0.75;
+  const dlyFb = ctx.createGain(); dlyFb.gain.value = 0.28;
+  const dlyG  = ctx.createGain(); dlyG.gain.value  = 0.18;
+  dly.connect(dlyFb); dlyFb.connect(dly);
+  dly.connect(dlyG);  dlyG.connect(comp);
+  delayIn = dly;
+
+  playing  = true;
+  step     = 0;
+  padBar   = 0;
+  nextTime = ctx.currentTime + 0.05;
+
+  document.getElementById('musicBtn').classList.add('playing');
+  document.getElementById('musicIcon').textContent  = '■';
+  document.getElementById('musicLabel').textContent = 'PLAYING';
+
+  scheduler();
+}
+
+function stopMusic() {
+  playing = false;
+  if (timerId) { clearTimeout(timerId); timerId = null; }
+  if (ctx)     { ctx.close(); ctx = null; }
+  document.getElementById('musicBtn').classList.remove('playing');
+  document.getElementById('musicIcon').textContent  = '▶';
+  document.getElementById('musicLabel').textContent = 'SYNTHWAVE';
+}
+</script>
+
+</body>
+</html>
