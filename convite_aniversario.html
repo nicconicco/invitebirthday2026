@@ -28,7 +28,7 @@
   }
 
   .page {
-    width: 800px;
+    width: min(800px, 100%);
     min-height: 1100px;
     margin: 0 auto;
     position: relative;
@@ -556,6 +556,65 @@
     box-shadow: 0 0 10px rgba(0,245,255,0.5);
   }
 
+  /* ── Responsive ─────────────────────────────────────────────── */
+  @media (max-width: 860px) {
+    .page {
+      width: 100%;
+      min-height: unset;
+      border-left: none;
+      border-right: none;
+      box-shadow: 0 0 20px rgba(0,245,255,0.2);
+    }
+    .content { padding: 36px 24px; }
+
+    .sys-tag { font-size: 9px; letter-spacing: 2px; word-break: break-all; }
+
+    .title-top { font-size: 11px; letter-spacing: 4px; }
+    .title-main { font-size: clamp(36px, 11vw, 72px); letter-spacing: 1px; }
+    .title-name { font-size: clamp(14px, 4.5vw, 30px); letter-spacing: 2px; }
+
+    .info-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .info-label { font-size: 9px; letter-spacing: 1px; }
+    .info-value { font-size: clamp(14px, 4vw, 20px); }
+
+    .section-title { font-size: 11px; letter-spacing: 3px; }
+
+    .location-address { font-size: clamp(13px, 3.5vw, 18px); }
+    .location-address strong { font-size: clamp(15px, 4vw, 22px); }
+    .location-note { font-size: 11px; }
+    .location-card::after { display: none; }
+
+    .map-container { height: 140px; }
+    .map-coords { font-size: 10px; letter-spacing: 1px; }
+
+    .alert { font-size: clamp(12px, 3.2vw, 15px); padding: 10px 12px; }
+    .alert-icon { font-size: 16px; }
+
+    .rsvp-section::before { font-size: 9px; letter-spacing: 1px; left: 12px; }
+    .rsvp-text { font-size: clamp(13px, 3.5vw, 16px); }
+    .rsvp-deadline { font-size: clamp(16px, 5vw, 26px); letter-spacing: 1px; }
+
+    .footer { flex-direction: column; gap: 6px; text-align: center; }
+    .footer-left, .footer-right { font-size: 10px; }
+
+    .music-btn { top: 12px; right: 12px; padding: 8px 12px; font-size: 9px; }
+
+    .corner { width: 30px; height: 30px; }
+  }
+
+  @media (max-width: 480px) {
+    .content { padding: 28px 16px; }
+
+    .title-main { font-size: clamp(28px, 13vw, 50px); }
+    .title-name { font-size: clamp(12px, 4vw, 20px); letter-spacing: 1px; }
+    .title-top  { font-size: 9px; letter-spacing: 2px; }
+
+    .info-grid { grid-template-columns: 1fr; gap: 8px; }
+
+    .rsvp-section { padding: 24px 14px 16px; }
+    .rsvp-section::before { font-size: 8px; white-space: nowrap; overflow: hidden; max-width: calc(100% - 24px); }
+  }
+
   /* Particle dots */
   .particle {
     position: absolute;
@@ -1022,6 +1081,33 @@ function stopMusic() {
   document.getElementById('musicIcon').textContent  = '▶';
   document.getElementById('musicLabel').textContent = 'SYNTHWAVE';
 }
+
+// ── Autoplay na primeira interação ───────────────────────────────
+function autoStart() {
+  if (!playing) startMusic();
+  document.removeEventListener('click',      autoStart);
+  document.removeEventListener('touchstart', autoStart);
+  document.removeEventListener('keydown',    autoStart);
+}
+
+// Tenta autoplay direto; se o browser bloquear, aguarda interação
+(function() {
+  try {
+    const probe = new (window.AudioContext || window.webkitAudioContext)();
+    if (probe.state === 'running') {
+      probe.close();
+      startMusic();
+    } else {
+      probe.close();
+      document.addEventListener('click',      autoStart, { once: true });
+      document.addEventListener('touchstart', autoStart, { once: true });
+      document.addEventListener('keydown',    autoStart, { once: true });
+    }
+  } catch(e) {
+    document.addEventListener('click',      autoStart, { once: true });
+    document.addEventListener('touchstart', autoStart, { once: true });
+  }
+})();
 </script>
 
 </body>
